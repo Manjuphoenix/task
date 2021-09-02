@@ -10,11 +10,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ProductDetail(DetailView):
     model = Product
-    template_name = 'product_detail.html'
+    template_name = 'product/product_detail.html'
 
-    def get_object(self):
-        id_ = self.kwargs.get("id")
-        return get_object_or_404(Product, id=id_)
+    # def get_object(self):
+    #     id_ = self.kwargs.get("id")
+    #     return get_object_or_404(Product, id=id_)
 
 
 class AddProductView(LoginRequiredMixin, CreateView):

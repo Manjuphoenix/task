@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from boto3 import s3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -25,23 +25,24 @@ SECRET_KEY = 'django-insecure-43xdjr0c#8ymmoo_tbk%o90baoymiu@x292=-(3bl8o^q%sxzc
 # SECURITY WARNING: don't run with debug turned on in production!
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", "Production")
-DEBUG = ENVIRONMENT = "Local"
+# DEBUG = ENVIRONMENT ==  "Local"
 
-if ENVIRONMENT == "Local":
-    ALLOWED_HOSTS = ["*"]
-elif ENVIRONMENT == "Development":
-    ALLOWED_HOSTS = [
-        "localhost",
-        "0.0.0.0",
-        "mb-dashboard-dev.datax.ai"
-    ]
-else:
-    ALLOWED_HOSTS = [
-        "localhost",
-        "0.0.0.0",
-        "mb-dashboard.datax.ai"
-    ]
-
+DEBUG = True
+# if ENVIRONMENT == "Local":
+#     ALLOWED_HOSTS = ["*"]
+# elif ENVIRONMENT == "Development":
+#     ALLOWED_HOSTS = [
+#         "localhost",
+#         "0.0.0.0",
+#         "mb-dashboard-dev.datax.ai"
+#     ]
+ALLOWED_HOSTS = ['*']
+# else:
+#     ALLOWED_HOSTS = [
+#         "localhost",
+#         "0.0.0.0",
+#         "mb-dashboard.datax.ai"
+#     ]
 
 
 # Application definition
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product',
+    'storages',
+    'boto3.s3'
 ]
 
 MIDDLEWARE = [
@@ -97,7 +100,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -116,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -130,6 +131,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATIC_URL = '/static/'
 
 
 LOGIN_REDIRECT_URL = "products/list_product"
@@ -140,21 +144,18 @@ LOGIN_URL = "login"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-STATIC_URL = '/static/'
-
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-if DEBUG:
-
+if False:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     MEDIA_URL = "/media/"
-else:
-    AWS_ACCESS_KEY_ID = 'AKIA53FOKCRF2LT4LTFJ'
-    AWS_SECRET_ACCESS_KEY = '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'
+
+
+if True:
+    AWS_ACCESS_KEY_ID = 'AKIA53FOKCRF7VKNWCOO'
+    AWS_SECRET_ACCESS_KEY = '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'
     AWS_STORAGE_BUCKET_NAME = 'localmaterialbankdashboard'
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
@@ -163,3 +164,7 @@ else:
     AWS_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
