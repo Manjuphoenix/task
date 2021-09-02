@@ -33,15 +33,11 @@ DEBUG = True
 # elif ENVIRONMENT == "Development":
 #     ALLOWED_HOSTS = [
 #         "localhost",
-#         "0.0.0.0",
-#         "mb-dashboard-dev.datax.ai"
 #     ]
 ALLOWED_HOSTS = ['*']
 # else:
 #     ALLOWED_HOSTS = [
 #         "localhost",
-#         "0.0.0.0",
-#         "mb-dashboard.datax.ai"
 #     ]
 
 
@@ -98,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django_db',
         'USER': 'db_user',
-        'PASSWORD': '<password you entered when creating db_user>',
+        'PASSWORD': '5028',
         'HOST': 'localhost',
         'PORT': '',                      # Set to empty string for default.
     }
