@@ -33,15 +33,11 @@ DEBUG = True
 # elif ENVIRONMENT == "Development":
 #     ALLOWED_HOSTS = [
 #         "localhost",
-#         "0.0.0.0",
-#         "mb-dashboard-dev.datax.ai"
 #     ]
 ALLOWED_HOSTS = ['*']
 # else:
 #     ALLOWED_HOSTS = [
 #         "localhost",
-#         "0.0.0.0",
-#         "mb-dashboard.datax.ai"
 #     ]
 
 
@@ -95,8 +91,12 @@ WSGI_APPLICATION = 'product_catalog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_db',
+        'USER': 'db_user',
+        'PASSWORD': '5028',
+        'HOST': 'localhost',
+        'PORT': '',                      # Set to empty string for default.
     }
 }
 
