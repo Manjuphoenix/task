@@ -26,3 +26,5 @@ class AddProductView(LoginRequiredMixin, CreateView):
 class ListProductsView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'product/list_product.html'
+    paginate_by = 2
+
