@@ -1,5 +1,6 @@
-{% include 'nav_bar.html' %}
+{% extends 'base.html' %}
 {% block content %}
+    {% include 'nav_bar.html' %}
     <div class="container">
         <h4>New product</h4><br>
     </div>
@@ -23,10 +24,10 @@
         <div class="col-sm-12">
             <label for="Product" class="col-sm-2">Product</label>
             <select name="{{ form.type.name }}" id="{{ form.type.id_for_label }}"
-                class="d-inline-flex p-2 col-sm-4 mx-auto">
-            <option value="Artifact">Artifact</option>
-            <option value="Wallpaper">Wallpaper</option>
-        </select>
+                    class="d-inline-flex p-2 col-sm-4 mx-auto">
+                <option value="Artifact">Artifact</option>
+                <option value="Wallpaper">Wallpaper</option>
+            </select>
         </div>
         <br>
         <div class="form-group">

@@ -1,6 +1,7 @@
-{% include 'nav_bar.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    {% include 'nav_bar.html' %}
     <a class="btn px-md-3 btn-dark" data-role="button" href="{% url 'products:new_product' %}">Add new product</a>
     &nbsp;&nbsp;&nbsp;
     <table class="table">
