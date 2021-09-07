@@ -24,22 +24,15 @@ SECRET_KEY = 'django-insecure-43xdjr0c#8ymmoo_tbk%o90baoymiu@x292=-(3bl8o^q%sxzc
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ENVIRONMENT = os.getenv("ENVIRONMENT", "Production")
+# ENVIRONMENT = os.getenv("ENVIRONMENT", "Production")
 # DEBUG = ENVIRONMENT ==  "Local"
-
-DEBUG = True
-# if ENVIRONMENT == "Local":
-#     ALLOWED_HOSTS = ["*"]
-# elif ENVIRONMENT == "Development":
-#     ALLOWED_HOSTS = [
-#         "localhost",
-#     ]
-ALLOWED_HOSTS = ['*']
+# if ENVIRONMENT == ENVIRONMENT:
+#     DEBUG = True
 # else:
-#     ALLOWED_HOSTS = [
-#         "localhost",
-#     ]
+#     DEBUG = False
+DEBUG = False
 
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -89,22 +82,25 @@ WSGI_APPLICATION = 'product_catalog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'django_db',
-#         'USER': 'db_user',
-#         'PASSWORD': '5028',
-#         'HOST': 'localhost',
-#         'PORT': '',                      # Set to empty string for default.
-#     }
-# }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase',
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'django_db',
+            'USER': 'db_user',
+            'PASSWORD': '5028',
+            'HOST': 'localhost',
+            'PORT': '',  # Set to empty string for default.
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -141,7 +137,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = '/static/'
 
-
 LOGIN_REDIRECT_URL = "products/list_product"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "login"
@@ -150,16 +145,15 @@ LOGIN_URL = "login"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-if False:
+if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     MEDIA_URL = "/media/"
 
 
-if True:
+else:
     AWS_ACCESS_KEY_ID = 'AKIA53FOKCRF7VKNWCOO'
     AWS_SECRET_ACCESS_KEY = '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'
     AWS_STORAGE_BUCKET_NAME = 'localmaterialbankdashboard'
