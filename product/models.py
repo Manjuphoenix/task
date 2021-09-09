@@ -8,7 +8,6 @@ PRODUCT_TYPES = [
     ('Artifact', 'Artifact'),
 ]
 
-
 class Product(models.Model):
     title = models.CharField(max_length=200, null=False)
     type = models.CharField(max_length=9, choices=PRODUCT_TYPES, null=False)
@@ -18,12 +17,6 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, auto_created=True)
-
-    def get_image_file(self):
-        if self.image:
-            return self.image.url
-        else:
-            return None
 
     def __str__(self):
         return self.title

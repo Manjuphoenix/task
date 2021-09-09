@@ -1,13 +1,15 @@
-from django.conf.urls import url
-from django.urls import path, include
+from django.urls import path
 
-from .views import AddProductView, ListProductsView, ProductDetail, SearchProduct
+from .views import AddProductView, list_product, list_product_wallpaper, list_product_artifact, product_detail, search
 
 app_name = 'products'
 urlpatterns = [
     path('new/', AddProductView.as_view(), name='new_product'),
-    path('list_product/', ListProductsView.as_view(), name='list_product'),
-    path('<pk>/', ProductDetail.as_view(), name='product_detail'),
+    path('list_product', list_product, name='list_product'),
+    path('list_product/wallpaper/', list_product_wallpaper, name='list_product_wallpaper'),
+    path('list_product/artifact/', list_product_artifact, name='list_product_artifact'),
+    path('search/', search, name='filter_product'),
+    path('<pk>/', product_detail, name='product_detail'),
 ]
 
 
