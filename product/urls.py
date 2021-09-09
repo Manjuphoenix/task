@@ -1,9 +1,14 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+from .views import *
 
-from .views import AddProductView, list_product, list_product_wallpaper, list_product_artifact, product_detail, search
+router = routers.DefaultRouter()
+router.register(r'products', ProductView)
 
 app_name = 'products'
 urlpatterns = [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('new/', AddProductView.as_view(), name='new_product'),
     path('list_product', list_product, name='list_product'),
     path('list_product/wallpaper/', list_product_wallpaper, name='list_product_wallpaper'),

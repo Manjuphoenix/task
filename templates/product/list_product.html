@@ -2,20 +2,26 @@
 {% load static %}
 {% block content %}
     {% include 'nav_bar.html' %}
+     <form method="get">
+     <a href="{% url 'products:list_product_wallpaper' %}">Wallpaper</a><br>
+    <a href="{% url 'products:list_product_artifact' %}">Artifact</a>
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form><br>
     <a class="btn px-md-3 btn-dark" data-role="button" href="{% url 'products:new_product' %}">Add new product</a><br>
-    &nbsp;&nbsp;
-    <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="{% url 'products:list_product_wallpaper' %}">
-  <label class="form-check-label" for="flexRadioDefault1">
-    Wallpaper list
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
-    Artifact list
-  </label>
-</div>
+    &nbsp;&nbsp;<br>
+{#    <div class="form-check">#}
+{#  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="{% url 'products:list_product_wallpaper' %}">#}
+{#  <label class="form-check-label" for="flexRadioDefault1">#}
+{#    Wallpaper list#}
+{#  </label>#}
+{#</div>#}
+{#<div class="form-check">#}
+{#  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>#}
+{#  <label class="form-check-label" for="flexRadioDefault2">#}
+{#    Artifact list#}
+{#  </label>#}
+{#</div>#}
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -27,7 +33,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for product in product %}
+        {% for product in filter.qs %}
             <tr>
                 <th scope="row">{{ product.id }}</th>
                 <td><a href="{% url 'products:product_detail' pk=product.id %}">{{ product.title }}</a></td>
