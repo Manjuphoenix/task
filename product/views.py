@@ -68,20 +68,3 @@ class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-class ListProductAPIView(ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-
-class AddProductAPIView(CreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class UpdateProductAPIView(UpdateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class DeleteProductAPIView(DestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
